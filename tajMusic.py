@@ -9,7 +9,6 @@ client_secret = "7ea0c0a57a434e6e915f683a8be4b920"
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-
 # Get Spotify Username
 def get_username():
     username = input('Enter Username: ')
@@ -20,7 +19,6 @@ def get_username():
     else:
         new_username = input('Reenter Username: ')
         return new_username
-
 
 # Create Spotify playlist ID
 def create_playlist(username):
@@ -37,7 +35,6 @@ def create_playlist(username):
         playlists = sp.user_playlist_create(username, playlist_name)
         return playlists['id']
     
-
 # Get trackID for songs
 def get_track_id(song_name1, artist_name1, album_name1):
     print("Adding songs to playlist!")
@@ -64,7 +61,6 @@ def get_track_id(song_name1, artist_name1, album_name1):
         id_list = []
         i += 1
     return my_array, album_list, song_list
-
 
 # Get trackID for songs
 def get_missing_track_id(missing_albums1, missing_tracks1):
@@ -112,8 +108,8 @@ def add_songs_to_playlist(username, playlist_id, track_ids):
         print('Finished transferring playlist')
         return results
 
-def xml_to_dict:
-    with open('')
+#def xml_to_dict:
+#    with open('')
 
 
 def add_song_ids(multiple_tracks1, more_tracks1):
