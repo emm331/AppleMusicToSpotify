@@ -20,7 +20,7 @@ def get_username():
         new_username = input('Reenter Username: ')
         return new_username
 
-# Create Spotify playlist ID
+#Create Spotify playlist ID
 def create_playlist(username):
 
     username = username
@@ -36,31 +36,31 @@ def create_playlist(username):
         return playlists['id']
     
 # Get trackID for songs
-def get_track_id(song_name1, artist_name1, album_name1):
-    print("Adding songs to playlist!")
-    id_list = []
-    my_array = []
-    album_list = []
-    song_list = []
+#def get_track_id(song_name1, artist_name1, album_name1):
+    #print("Adding songs to playlist!")
+    #id_list = []
+    #my_array = []
+   # album_list = []
+  #  song_list = []
 
-    i = 0
-    while i < len(song_name1):
+    #i = 0
+    #while i < len(song_name1):
        # print("loop")
-        artist = artist_name1[i]
-        track = song_name1[i]
-        print(track)
+ #       artist = artist_name1[i]
+  #      track = song_name1[i]
+   #    print(track)
 
-        track_id = sp.search(q='artist:' + artist + ' track:' + track, type='track')
-        for songsID in track_id['tracks']['items']:
-            id_list.append(songsID['id'])
-        if not id_list:
-            album_list.append(album_name1[i])
-            song_list.append(song_name1[i])
-        else:
-            my_array.append(id_list[0])
-        id_list = []
-        i += 1
-    return my_array, album_list, song_list
+   #     track_id = sp.search(q='artist:' + artist + ' track:' + track, type='track')
+    #    for songsID in track_id['tracks']['items']:
+     #       id_list.append(songsID['id'])
+     #   if not id_list:
+      #      album_list.append(album_name1[i])
+       #     song_list.append(song_name1[i])
+       # else:
+        #    my_array.append(id_list[0])
+       # id_list = []
+       # i += 1
+    #return my_array, album_list, song_list
 
 # Get trackID for songs
 def get_missing_track_id(missing_albums1, missing_tracks1):

@@ -4,11 +4,13 @@ python-dotenv
 
 pandas
 
-spotify_accessor 
-
 requests
 
 spotipy 
+
+dicttoxml
+
+lxml
 
 #plotly
 
