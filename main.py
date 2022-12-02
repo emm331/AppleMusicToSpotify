@@ -14,6 +14,7 @@ my_username = tm.get_username()
 
 print(playlist)
 
+#New change
 with open(playlist) as fd:
     doc = xmltodict.parse(fd.read())
 
