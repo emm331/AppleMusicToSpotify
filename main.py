@@ -6,6 +6,7 @@ import xmltodict
 import pprint
 import pandas as pd
 
+#New imports -- make sure to add these to requirements.txt
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 import spotipy.util as util
@@ -17,20 +18,18 @@ client_secret = "7ea0c0a57a434e6e915f683a8be4b920"
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-
 #Greet user 
 print('Welcome to Taj!\n')
-
 playlist = input('Enter the XML file name: ') + '.xml'
-
-#playlist = 'Music.xml'
 
 #Get username
 my_username = tm.get_username()
 
-playlist_name = input('Enter playlist name:')
+#Create playlist
+playlist_name = input('enter playlist name')
+my_playlist_id = tm.create_playlist(my_username)
 
-#Make trackc ID List 
+#Make track ID List 
 song_list = []
 artist_list = []
 album_list = []
@@ -59,17 +58,6 @@ with open(playlist) as fd:
         album_list.append(df['string'][i][0])
         print(df['string'][i][4])
 
-#Make track IDs
-for i in range(len(song_list)):
-    track_ids = []
-    track_ids.append(song_list[i])
-    track_ids.append(artist_list[i])
-    track_ids.append(album_list[i])
-    i = i+1
-else:
-    print("LISTS BELOW")
-    print(track_ids)
-
 #Add songs to a playlist
 token = util.prompt_for_user_token(username=my_username, scope='playlist-modify-public', client_id=client_id,
                                        client_secret=client_secret, redirect_uri="http://localhost:8888/callback")
@@ -78,7 +66,7 @@ if token:
         sp = spotipy.Spotify(auth=token)
         sp.trace = False
 
-        results = sp.user_playlist_add_tracks(my_username, playlist_name, track_ids)
+        results = sp.user_playlist_add_tracks(my_username, playlist_name, song_list)
         print('Finished transferring playlist')
         #return results
 
