@@ -4,52 +4,85 @@ from bs4 import BeautifulSoup
 import json
 import xmltodict
 import pprint
+import pandas as pd
+
+from spotipy.oauth2 import SpotifyClientCredentials
+import spotipy
+import spotipy.util as util
+import numpy as np
+
+# Spotify Token Access
+client_id = "e511d6d85faa4eb2bf5992529106c09b"
+client_secret = "7ea0c0a57a434e6e915f683a8be4b920"
+client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+
 
 #Greet user 
 print('Welcome to Taj!\n')
+
 playlist = input('Enter the XML file name: ') + '.xml'
+
+#playlist = 'Music.xml'
 
 #Get username
 my_username = tm.get_username()
 
-print(playlist)
+playlist_name = input('Enter playlist name:')
 
-#New change
+#Make trackc ID List 
+song_list = []
+artist_list = []
+album_list = []
+
+#Song Name
 with open(playlist) as fd:
     doc = xmltodict.parse(fd.read())
+    df = pd.DataFrame(doc['plist']['dict']['dict']['dict'])
+    for i in range(len(df)):
+        song_list.append(df['string'][i][0])
+        print(df['string'][i][0])
 
-#print(doc)
-#print("The type is", type(doc))
-print(doc['plist']['@version'])
+#Artist Name
+with open(playlist) as fd:
+    doc = xmltodict.parse(fd.read())
+    df = pd.DataFrame(doc['plist']['dict']['dict']['dict'])
+    for i in range(len(df)):
+        artist_list.append(df['string'][i][0])
+        print(df['string'][i][1])
 
-#pp = pprint.PrettyPrinter(indent = 4)
-#pp.pprint(json.dumps(doc))
+#Album Name
+with open(playlist) as fd:
+    doc = xmltodict.parse(fd.read())
+    df = pd.DataFrame(doc['plist']['dict']['dict']['dict'])
+    for i in range(len(df)):
+        album_list.append(df['string'][i][0])
+        print(df['string'][i][4])
 
-##print("nw") my_dict = xmltodict.parse(doc)
-#print(my_dict['Name'])
-    
-#convert xml to dict
-#newdict = dict2xml(playlist, wrap ='root', indent = "    ")
-#print(newdict)
-#dictionary = BeautifulSoup(open(playlist), 'xml')
-#print(dictionary.keys())
-#print(dictionary)
-#x = dictionary.keys()
+#Make track IDs
+for i in range(len(song_list)):
+    track_ids = []
+    track_ids.append(song_list[i])
+    track_ids.append(artist_list[i])
+    track_ids.append(album_list[i])
+    i = i+1
+else:
+    print("LISTS BELOW")
+    print(track_ids)
 
-#print(list(dict.keys())[list(dict.values()).index(16)]) x = dictionary.items("Track ID")
+#Add songs to a playlist
+token = util.prompt_for_user_token(username=my_username, scope='playlist-modify-public', client_id=client_id,
+                                       client_secret=client_secret, redirect_uri="http://localhost:8888/callback")
 
-#print(xml_parser)
-#print(xml_parser["Delicate"])
+if token:
+        sp = spotipy.Spotify(auth=token)
+        sp.trace = False
 
-#songname = xml_parser.find('Delicate')
-
-#for key, value in tm.xml_parser():
- #   print(key, '->', value)
-
-#print(songname)
+        results = sp.user_playlist_add_tracks(my_username, playlist_name, track_ids)
+        print('Finished transferring playlist')
+        #return results
 
 
-#Name playlist
 
 
 #song_name = axp.get_song_name()
