@@ -10,6 +10,8 @@ spotipy
 
 dicttoxml
 
+xmltodict
+
 lxml
 
 #plotly

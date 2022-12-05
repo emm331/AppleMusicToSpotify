@@ -22,17 +22,12 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 print('Welcome to Taj!\n')
 playlist = input('Enter the XML file name: ') + '.xml'
 
-#Get username
-my_username = tm.get_username()
-
-#Create playlist
-playlist_name = input('enter playlist name')
-my_playlist_id = tm.create_playlist(my_username)
 
 #Make track ID List 
 song_list = []
 artist_list = []
 album_list = []
+track_id_list = []
 
 #Song Name
 with open(playlist) as fd:
@@ -47,7 +42,7 @@ with open(playlist) as fd:
     doc = xmltodict.parse(fd.read())
     df = pd.DataFrame(doc['plist']['dict']['dict']['dict'])
     for i in range(len(df)):
-        artist_list.append(df['string'][i][0])
+        artist_list.append(df['string'][i][1])
         print(df['string'][i][1])
 
 #Album Name
@@ -55,22 +50,34 @@ with open(playlist) as fd:
     doc = xmltodict.parse(fd.read())
     df = pd.DataFrame(doc['plist']['dict']['dict']['dict'])
     for i in range(len(df)):
-        album_list.append(df['string'][i][0])
+        album_list.append(df['string'][i][4])
         print(df['string'][i][4])
 
+#Get username
+my_username = tm.get_username()
+
+#Create playlist
+my_playlist_id = tm.create_playlist(my_username)
+
 #Add songs to a playlist
-token = util.prompt_for_user_token(username=my_username, scope='playlist-modify-public', client_id=client_id,
-                                       client_secret=client_secret, redirect_uri="http://localhost:8888/callback")
 
-if token:
-        sp = spotipy.Spotify(auth=token)
-        sp.trace = False
+for i in range(len(song_list)):
+    track_dict = sp.search(q= song_list[i] + " " + artist_list[i] + " " + album_list[i], limit = 1, offset = 0, type='track', market=None)
+    print(song_list[i] + " " + artist_list[i] + " " + album_list[i])
 
-        results = sp.user_playlist_add_tracks(my_username, playlist_name, song_list)
-        print('Finished transferring playlist')
-        #return results
+    track_df = pd.DataFrame(track_dict['tracks']['items'])
+    track_id_list.append(track_df['id'])
+print(track_id_list)
 
+for i in range(len(track_id_list)):
+    token = tm.add_songs_to_playlist(my_username, my_playlist_id, track_id_list[i])
 
+# if token:
+#         sp = spotipy.Spotify(auth=token)
+#         sp.trace = False
+
+#         results = sp.user_playlist_add_tracks(my_username, my_playlist_id, song_list)
+#         return results
 #song_name = axp.get_song_name()
 #final_song_name = axp.remove_feat_from_song(song_name)
 #artist_name = axp.get_artist_name()

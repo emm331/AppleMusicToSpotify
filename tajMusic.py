@@ -106,6 +106,7 @@ def add_songs_to_playlist(username, playlist_id, track_ids):
 
         results = sp.user_playlist_add_tracks(username, playlist_id, track_ids)
         print('Finished transferring playlist')
+        print(results)
         return results
 
 #def xml_to_dict:
