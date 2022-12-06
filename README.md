@@ -15,7 +15,6 @@ Install package dependencies:
 ```sh
 pip install -r requirements.txt
 ```
-<<<<<<< HEAD
 
 ## Usage
 
@@ -33,5 +32,3 @@ FLASK_APP=web_app flask run
 export FLASK_APP=web_app
 flask run
 ```
-=======
->>>>>>> 0ba764bb9c09c07e7eb925285ba2c72ff55494a7
