@@ -1,38 +1,34 @@
-# AppleMusicToSpotify
-# this is the "requirements.txt" file...
 
-python-dotenv
+## Setup
 
-pandas
+Create and activate a virtual environment:
 
-requests
+```sh
+conda create -n playlist-env python=3.8
 
-spotipy 
+conda activate playlist-env
+```
 
-dicttoxml
+Install package dependencies:
 
-xmltodict
+```sh
+pip install -r requirements.txt
+```
 
-lxml
+## Usage
 
-#plotly
+### Web App
 
-#sendgrid==6.6.0
+Run the web app (then view in the browser at http://localhost:5000/):
 
-flask # <--- ADD FOR WEB APP
-#gunicorn
+```sh
+# Mac OS:
+FLASK_APP=web_app flask run
 
-
-# using this to find and run our tests:
-pytest
-
-# using bsoup in testing the web app:
-beautifulsoup4 # <-- ADDITION
-
-# for our web app interface:
-flask
-
-# the heroku server wants to use this package to run our web app
-gunicorn
-
-sendgrid==6.6.0
+# Windows OS:
+# ... if `export` doesn't work for you, try `set` instead
+# ... or set FLASK_APP variable via ".env" file
+export FLASK_APP=web_app
+flask run
+```
+>>>>>>> f429ad3665e3d7b19e3cdacbdbb91989051b39f0
