@@ -31,4 +31,3 @@ FLASK_APP=web_app flask run
 export FLASK_APP=web_app
 flask run
 ```
->>>>>>> f429ad3665e3d7b19e3cdacbdbb91989051b39f0
