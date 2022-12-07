@@ -1,4 +1,3 @@
-# AppleMusicToSpotify
 
 ## Setup
 
