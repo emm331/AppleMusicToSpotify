@@ -6,17 +6,19 @@ from tajMusic import get_username, create_playlist, get_missing_track_id, add_so
 
 convert_routes = Blueprint("convert_routes", __name__)
 
-@convert_routes.route("/convert/playlist") #, methods=["GET", "POST"])
+@convert_routes.route("/convert/playlist", methods=["POST"])
 def convert_playlist():
     print("New Method")
 
   #  if request.method == "POST":
-   #     request_data = dict(request.form)
-    ##    print("FORM DATA:")
+    request_data = dict(request.form)
+    request_file = dict(request.files)
+    print("FORM DATA:", request_data)
 
     name = request_data.get("name") or "Taj on Aux"
+    #put this in a .env
     username = request_data.get("username") or "31kxkygp247mvkk3ixeeiryzuodm"
-    XML = request_data.get("XML") or "Music"
+    XML = request_file.get("XML") or "Music"
 
     try:
         df = everything(XML=XML, name=name, username=username)
@@ -24,3 +26,4 @@ def convert_playlist():
         
     except Exception as err:
         print("OOps")
+        return redirect("/convert")
