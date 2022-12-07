@@ -18,56 +18,34 @@ client_secret = "7ea0c0a57a434e6e915f683a8be4b920"
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-#Greet user 
-print('Welcome to Taj!\n')
-playlist = input('Enter the XML file name: ') + '.xml'
+#Get XML name
+playlist = tm.xml_name()
 
-#Make track ID List 
-song_list = []
-artist_list = []
-album_list = []
-track_id_list = []
+#Get song list
+song_list= []
+song_list= tm.song_list_generator(playlist)
 
-#Song Name
-with open(playlist) as fd:
-    doc = xmltodict.parse(fd.read())
-    df = pd.DataFrame(doc['plist']['dict']['dict']['dict'])
-    for i in range(len(df)):
-        song_list.append(df['string'][i][0])
-        print(df['string'][i][0])
+#Get artist list
+artist_list=[]
+artist_list=tm.artist_list_generator(playlist)
 
-#Artist Name
-with open(playlist) as fd:
-    doc = xmltodict.parse(fd.read())
-    df = pd.DataFrame(doc['plist']['dict']['dict']['dict'])
-    for i in range(len(df)):
-        artist_list.append(df['string'][i][1])
-        print(df['string'][i][1])
-
-#Album Name
-with open(playlist) as fd:
-    doc = xmltodict.parse(fd.read())
-    df = pd.DataFrame(doc['plist']['dict']['dict']['dict'])
-    for i in range(len(df)):
-        album_list.append(df['string'][i][4])
-        print(df['string'][i][4])
+#Get album list 
+album_list=[]
+album_list=tm.album_list_generator(playlist)
 
 #Get username
 my_username = tm.get_username()
 
+#Get playlist name 
+playlist_name = tm.get_playlist_name()
+
 #Create playlist
-my_playlist_id = tm.create_playlist(my_username)
+my_playlist_id = tm.create_playlist(my_username, playlist_name)
+
+#Track ID List
+track_id_list=[]
 
 #Add songs to a playlist
 tm.add_to_playlist(song_list, artist_list, album_list, my_username, my_playlist_id, track_id_list)
 
-#for i in range(len(song_list)):
- #   track_dict = sp.search(q= song_list[i] + " " + artist_list[i] + " " + album_list[i], limit = 1, offset = 0, type='track', market=None)
-  #  print(song_list[i] + " " + artist_list[i] + " " + album_list[i])
-
-   # track_df = pd.DataFrame(track_dict['tracks']['items'])
-    #track_id_list.append(track_df['id'])
-#print(track_id_list)
-
-#for i in range(len(track_id_list)):
-#    token = tm.add_songs_to_playlist(my_username, my_playlist_id, track_id_list[i])
+tm.everything(playlist, my_username, playlist_name)

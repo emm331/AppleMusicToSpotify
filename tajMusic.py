@@ -30,11 +30,57 @@ def get_username():
         new_username = input('Reenter Username: ')
         return new_username
 
-#Create Spotify playlist ID
-def create_playlist(username):
+def xml_name():
+    #Greet user 
+    print('Welcome to Taj!\n')
+    playlist = input('Enter the XML file name: ') + '.xml'
+    return playlist
 
+#Get playlist name
+def get_playlist_name():
+    playlist_name= input("Enter a playlist name: ")
+    return playlist_name
+
+def song_list_generator(playlist):
+    #Make track ID List 
+   
+    song_list = []
+    #Song Name
+    with open(playlist) as fd:
+        doc = xmltodict.parse(fd.read())
+        df = pd.DataFrame(doc['plist']['dict']['dict']['dict'])
+        for i in range(len(df)):
+            song_list.append(df['string'][i][0])
+            print(df['string'][i][0])
+    return song_list
+
+def artist_list_generator(playlist):
+    #Artist Name
+    artist_list = []
+    with open(playlist) as fd:
+        doc = xmltodict.parse(fd.read())
+        df = pd.DataFrame(doc['plist']['dict']['dict']['dict'])
+        for i in range(len(df)):
+            artist_list.append(df['string'][i][1])
+            print(df['string'][i][1])
+    return artist_list
+
+def album_list_generator(playlist):
+    #Album Name
+    album_list = []
+    with open(playlist) as fd:
+        doc = xmltodict.parse(fd.read())
+        df = pd.DataFrame(doc['plist']['dict']['dict']['dict'])
+        for i in range(len(df)):
+            album_list.append(df['string'][i][4])
+            print(df['string'][i][4])
+    return album_list
+
+#Create Spotify playlist ID
+def create_playlist(username, playlist_name):
+    track_id_list = []
     username = username
-    playlist_name = input('Enter playlist name: ')
+   # playlist_name = input('Enter playlist name: ')
 
     token = util.prompt_for_user_token(username=username, scope='playlist-modify-public', client_id=client_id,
                                        client_secret=client_secret, redirect_uri="http://localhost:8888/callback")
@@ -101,3 +147,11 @@ def add_to_playlist(song_list, artist_list, album_list, my_username, my_playlist
 
     for i in range(len(track_id_list)):
         token = tm.add_songs_to_playlist(my_username, my_playlist_id, track_id_list[i])
+
+def everything(playlist, my_username, my_playlist_id):
+    #playist is xml name
+    #my_username is username
+    #my_playlist_id is new playlist name
+    print(playlist)
+    print(my_username)
+    print(my_playlist_id)
