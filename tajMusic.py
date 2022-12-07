@@ -155,3 +155,6 @@ def everything(playlist, my_username, my_playlist_id):
     print(playlist)
     print(my_username)
     print(my_playlist_id)
+    return(playist)
+    return(my_username)
+    return(my_playlist_id)
