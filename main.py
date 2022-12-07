@@ -22,7 +22,6 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 print('Welcome to Taj!\n')
 playlist = input('Enter the XML file name: ') + '.xml'
 
-
 #Make track ID List 
 song_list = []
 artist_list = []
@@ -60,31 +59,15 @@ my_username = tm.get_username()
 my_playlist_id = tm.create_playlist(my_username)
 
 #Add songs to a playlist
+tm.add_to_playlist(song_list, artist_list, album_list, my_username, my_playlist_id, track_id_list)
 
-for i in range(len(song_list)):
-    track_dict = sp.search(q= song_list[i] + " " + artist_list[i] + " " + album_list[i], limit = 1, offset = 0, type='track', market=None)
-    print(song_list[i] + " " + artist_list[i] + " " + album_list[i])
+#for i in range(len(song_list)):
+ #   track_dict = sp.search(q= song_list[i] + " " + artist_list[i] + " " + album_list[i], limit = 1, offset = 0, type='track', market=None)
+  #  print(song_list[i] + " " + artist_list[i] + " " + album_list[i])
 
-    track_df = pd.DataFrame(track_dict['tracks']['items'])
-    track_id_list.append(track_df['id'])
-print(track_id_list)
+   # track_df = pd.DataFrame(track_dict['tracks']['items'])
+    #track_id_list.append(track_df['id'])
+#print(track_id_list)
 
-for i in range(len(track_id_list)):
-    token = tm.add_songs_to_playlist(my_username, my_playlist_id, track_id_list[i])
-
-# if token:
-#         sp = spotipy.Spotify(auth=token)
-#         sp.trace = False
-
-#         results = sp.user_playlist_add_tracks(my_username, my_playlist_id, song_list)
-#         return results
-#song_name = axp.get_song_name()
-#final_song_name = axp.remove_feat_from_song(song_name)
-#artist_name = axp.get_artist_name()
-#album_name = axp.get_album_name()
-#final_album_name = axp.remove_feat_from_album(album_name)
-#my_playlist_id = sa.create_playlist(my_username)
-#multiple_tracks, missing_albums, missing_tracks = sa.get_track_id(final_song_name, artist_name, final_album_name)
-#more_tracks = sa.get_missing_track_id(missing_albums, missing_tracks)
-#all_songs = sa.add_song_ids(multiple_tracks, more_tracks)
-# sa.add_more_than_100_songs_to_playlist(my_username, my_playlist_id, all_songs)
+#for i in range(len(track_id_list)):
+#    token = tm.add_songs_to_playlist(my_username, my_playlist_id, track_id_list[i])

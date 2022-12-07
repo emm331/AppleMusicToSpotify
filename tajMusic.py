@@ -1,14 +1,24 @@
+##import applemusic_xml_parser as axp
+import tajMusic as tm
+from bs4 import BeautifulSoup
+import json
+import xmltodict
+import pprint
+import pandas as pd
+
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 import spotipy.util as util
 import numpy as np
 
 # Spotify Token Access
+#Do we need this here, i think we have it in main
 client_id = "e511d6d85faa4eb2bf5992529106c09b"
 client_secret = "7ea0c0a57a434e6e915f683a8be4b920"
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
+song_list=[]
 # Get Spotify Username
 def get_username():
     username = input('Enter Username: ')
@@ -36,33 +46,6 @@ def create_playlist(username):
         return playlists['id']
     
 # Get trackID for songs
-#def get_track_id(song_name1, artist_name1, album_name1):
-    #print("Adding songs to playlist!")
-    #id_list = []
-    #my_array = []
-   # album_list = []
-  #  song_list = []
-
-    #i = 0
-    #while i < len(song_name1):
-       # print("loop")
- #       artist = artist_name1[i]
-  #      track = song_name1[i]
-   #    print(track)
-
-   #     track_id = sp.search(q='artist:' + artist + ' track:' + track, type='track')
-    #    for songsID in track_id['tracks']['items']:
-     #       id_list.append(songsID['id'])
-     #   if not id_list:
-      #      album_list.append(album_name1[i])
-       #     song_list.append(song_name1[i])
-       # else:
-        #    my_array.append(id_list[0])
-       # id_list = []
-       # i += 1
-    #return my_array, album_list, song_list
-
-# Get trackID for songs
 def get_missing_track_id(missing_albums1, missing_tracks1):
     id_list = []
     my_array = []
@@ -83,13 +66,6 @@ def get_missing_track_id(missing_albums1, missing_tracks1):
         i += 1
     return my_array
 
-#def add_more_than_100_songs_to_playlist(username, playlist_id, track_ids):
-    #split array in size of 50
-    #track_id_chunks = np.array_split(track_ids, len(track_ids)/50)
-    #for track_id_chunk in track_id_chunks:
-        #add_songs_to_playlist(username, playlist_id, track_id_chunk)
-
-
 # Add songs to Spotify Playlist
 def add_songs_to_playlist(username, playlist_id, track_ids):
 
@@ -99,7 +75,6 @@ def add_songs_to_playlist(username, playlist_id, track_ids):
 
     token = util.prompt_for_user_token(username=username, scope='playlist-modify-public', client_id=client_id,
                                        client_secret=client_secret, redirect_uri="http://localhost:8888/callback")
-
     if token:
         sp = spotipy.Spotify(auth=token)
         sp.trace = False
@@ -108,12 +83,21 @@ def add_songs_to_playlist(username, playlist_id, track_ids):
         print('Finished transferring playlist')
         print(results)
         return results
-
-#def xml_to_dict:
-#    with open('')
-
-
+    
 def add_song_ids(multiple_tracks1, more_tracks1):
     result = multiple_tracks1 + more_tracks1
    # print("Song", result)
     return result
+
+#Add songs to a playlist
+def add_to_playlist(song_list, artist_list, album_list, my_username, my_playlist_id, track_id_list):
+    for i in range(len(song_list)):
+        track_dict = sp.search(q= song_list[i] + " " + artist_list[i] + " " + album_list[i], limit = 1, offset = 0, type='track', market=None)
+        print(song_list[i] + " " + artist_list[i] + " " + album_list[i])
+
+        track_df = pd.DataFrame(track_dict['tracks']['items'])
+        track_id_list.append(track_df['id'])
+    print(track_id_list)
+
+    for i in range(len(track_id_list)):
+        token = tm.add_songs_to_playlist(my_username, my_playlist_id, track_id_list[i])
