@@ -12,17 +12,24 @@ def convert_playlist():
 
   #  if request.method == "POST":
     request_data = dict(request.form)
-    request_file = dict(request.files)
+    #request_file = request.files
     print("FORM DATA:", request_data)
 
     name = request_data.get("name") or "Taj on Aux"
     #put this in a .env
     username = request_data.get("username") or "31kxkygp247mvkk3ixeeiryzuodm"
-    XML = request_file.get("XML") or "Music"
+    XML = request.files["file"] or "Music"
 
     try:
-        df = everything(XML=XML, name=name, username=username)
-        return("OPEN")
+        #df = everything(XML=XML, name=name, username=username)
+        print("hello")
+        #return(username=username)
+        print(username)
+        print(name)
+        #return("OPEN")
+        return render_template("playlist.html",
+            username=username
+        )
         
     except Exception as err:
         print("OOps")
