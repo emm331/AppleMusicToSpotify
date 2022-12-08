@@ -1,4 +1,4 @@
-## ** check last step for setup and env file information** - needs to be updated 
+# README.md
 ## Setup
 
 Create and activate a virtual environment:
@@ -24,13 +24,13 @@ Save the resuting file in the same directory as the directory where you cloned t
 
 ### Create a Spotify app 
 Create a Spotify app at the [spotify developer dashboard](https://developer.spotify.com/dashboard/applications) and select redirect url to `http://localhost:8888/callback`
-    - Create WebApp 
-    - Edit settings
-    - Redirect URIs: http://localhost:8888/callback (Add and Save)
-    - Go to .env file and **securely set Client ID and Client Secret** from newly created app
+- Create WebApp
+- Edit Settings
+- Redirect URIs -> http://localhost:8888/callback -> Add -> Save
+- Go to .env file and securely set Client ID and Client Secret from new created app 
 
 ###
-After running the web app (instructions below), log on to your Spotify account and enjoy your newly created playlist!
+After running the web app (instructions below), log on to your Spotify account, and enjoy your newly created playlist!
 
 ### Web App
 
