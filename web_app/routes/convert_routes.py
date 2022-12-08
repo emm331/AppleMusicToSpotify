@@ -23,7 +23,7 @@ def convert_playlist():
     try:
         #df = everything(XML=XML, name=name, username=username)
         #f = open(XML, "r")
-        please = song_list_generator(XML)
+        #please = song_list_generator(XML)
         #print(f.read())
         print("hello")
         #return(username=username)
