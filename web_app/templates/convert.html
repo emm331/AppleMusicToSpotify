@@ -19,7 +19,7 @@
      <p>Upload your Apple Music playlist as an .XML file</p>
 
     <div class="input-group mb-3">
-        <input type="file" class="form-control" id="inputGroupFile02">
+        <input type="file" class="form-control" id="inputGroupFile02" name="XML">
         <label class="input-group-text" name="XML" for="inputGroupFile02">Upload</label>
       </div>
 
@@ -27,8 +27,4 @@
     <button class="btn btn-dark">Convert My Playlist</button>
   </form>
 
-  <form method="POST" action="" enctype="multipart/form-data">
-    <p><input type="file" name="file" accept=".xml"></p>
-    <p><input type="submit" value="Submit"></p>
-  </form>
 {% endblock %}
