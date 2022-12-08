@@ -1,4 +1,4 @@
-
+## ** check last step for setup and env file information** - needs to be updated 
 ## Setup
 
 Create and activate a virtual environment:
@@ -16,6 +16,18 @@ pip install -r requirements.txt
 ```
 
 ## Usage
+
+### Export Apple Music playlists to XML File
+The first steps is to select the playlist you want to import over and export it as an XML file. 
+This is done by going to Apple Music, selecting File -> Library -> Export Playlist. 
+Save the resuting file in the same directors as the directory where you cloned this repo.
+
+### Create a Spotify app 
+Create a Spotify app at the [spotify developer dashboard)](https://developer.spotify.com/dashboard/applications) and select redirect url to `http://localhost:8888/callback`
+    - Create WebApp 
+    - Edit settings
+    - Redirect URIs: http://localhost:8888/callback (Add and Save)
+    - Go to .env file and **securely set Client ID and Client Secret** from newly created app
 
 ### Web App
 
