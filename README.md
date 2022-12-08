@@ -1,4 +1,4 @@
-# Apple Music to Spotify README.md
+# README.md
 ## Setup
 
 Create and activate a virtual environment:
