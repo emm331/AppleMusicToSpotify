@@ -29,6 +29,9 @@ Create a Spotify app at the [spotify developer dashboard](https://developer.spot
     - Redirect URIs: http://localhost:8888/callback (Add and Save)
     - Go to .env file and **securely set Client ID and Client Secret** from newly created app
 
+###
+After running the web app (instructions below), log on to your Spotify account and enjoy your newly created playlist!
+
 ### Web App
 
 Run the web app (then view in the browser at http://localhost:5000/):
