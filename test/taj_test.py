@@ -1,4 +1,4 @@
-#put test functions
+# this is the AppleMusicToSpotify/test/taj_test file...
 from app.tajMusic import song_list_generator, artist_list_generator, album_list_generator
 import os
 

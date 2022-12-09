@@ -119,7 +119,6 @@ def add_to_playlist(song_list, artist_list, album_list, my_username, my_playlist
     for i in range(len(song_list)):
         track_dict = sp.search(q= song_list[i] + " " + artist_list[i] + " " + album_list[i], limit = 1, offset = 0, type='track', market=None)
         print(song_list[i] + " " + artist_list[i] + " " + album_list[i])
-
         track_df = pd.DataFrame(track_dict['tracks']['items'])
         track_id_list.append(track_df['id'])
     print(track_id_list)
