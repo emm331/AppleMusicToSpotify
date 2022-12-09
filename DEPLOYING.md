@@ -52,11 +52,10 @@ heroku config # at this time, results might be empty-ish
 # set environment variables:
 heroku config:set APP_ENV="production"
 
-heroku config:set ALPHAVANTAGE_API_KEY="______"
-heroku config:set DEFAULT_SYMBOL="GOOGL"
+heroku config:set client_id="_____"
 
-heroku config:set SENDGRID_API_KEY="_________"
-heroku config:set SENDER_EMAIL_ADDRESS="someone@gmail.com"
+heroku config:set client_secret="_____"
+
 ```
 
 At this point, you should be able to verify the production environment has been configured with the proper environment variable values:
