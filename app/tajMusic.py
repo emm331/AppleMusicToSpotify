@@ -1,6 +1,6 @@
-#this is the AppleMusicToSpotify/app/tajMusic.py file...
+# this is the AppleMusicToSpotify/app/tajMusic.py file...
 
-#Imports
+# Imports
 from bs4 import BeautifulSoup
 import json
 import xmltodict
@@ -15,7 +15,7 @@ import app.tajMusic as tm
 import os
 from dotenv import load_dotenv
 
-#Spotify Token Access
+# Spotify Token Access
 load_dotenv()
 
 client_id = os.getenv("client_id")
@@ -34,22 +34,22 @@ def get_username():
         new_username = input('Reenter Username: ')
         return new_username
 
-#Get name of XML file
+# Get name of XML file
 def xml_name():
-    #Greet user 
+    # Greet user 
     print('Welcome to Taj!\n')
     playlist = input('Enter the XML file name: ') + '.xml'
     return playlist
 
-#Get name of new playlist
+# Get name of new playlist
 def get_playlist_name():
     playlist_name= input("Enter a playlist name: ")
     return playlist_name
 
-#Parse through XML and create list of songs
+# Parse through XML and create list of songs
 def song_list_generator(playlist):  
     song_list = []
-    #Song Name
+    # Song Name
     with open(playlist) as fd:
         doc = xmltodict.parse(fd.read())
         df = pd.DataFrame(doc['plist']['dict']['dict']['dict'])
@@ -58,9 +58,9 @@ def song_list_generator(playlist):
             print(df['string'][i][0])
     return song_list
 
-#Parse through XML and create list of artists
+# Parse through XML and create list of artists
 def artist_list_generator(playlist):
-    #Artist Name
+    # Artist Name
     artist_list = []
     with open(playlist) as fd:
         doc = xmltodict.parse(fd.read())
@@ -70,9 +70,9 @@ def artist_list_generator(playlist):
             print(df['string'][i][1])
     return artist_list
 
-#Parse through XML and create list of albums
+# Parse through XML and create list of albums
 def album_list_generator(playlist):
-    #Album Name
+    # Album Name
     album_list = []
     with open(playlist) as fd:
         doc = xmltodict.parse(fd.read())
@@ -82,7 +82,7 @@ def album_list_generator(playlist):
             print(df['string'][i][4])
     return album_list
 
-#Create Spotify playlist ID
+# Create Spotify playlist ID
 def create_playlist(username, playlist_name):
     track_id_list = []
     username = username
@@ -95,27 +95,6 @@ def create_playlist(username, playlist_name):
         playlists = sp.user_playlist_create(username, playlist_name)
         return playlists['id']
     
-# Get trackID for songs
-#def get_missing_track_id(missing_albums1, missing_tracks1):
- #   id_list = []
-  #  my_array = []
-
-   # i = 0
-   # while i < len(missing_tracks1):
-    #    album = missing_albums1[i]
-     #   track = missing_tracks1[i]
-
-      #  track_id = sp.search(q='album:' + album + ' track:' + track, type='track')
-       # for songsID in track_id['tracks']['items']:
-        #    id_list.append(songsID['id'])
-        #if not id_list:
-        #    print('Could not add: ' + missing_tracks1[i])
-       # else:
-       #     my_array.append(id_list[0])
-        #id_list = []
-        #i += 1
-    #return my_array
-
 # Add songs to Spotify Playlist
 def add_songs_to_playlist(username, playlist_id, track_ids):
     
@@ -136,12 +115,10 @@ def add_songs_to_playlist(username, playlist_id, track_ids):
     
 def add_song_ids(multiple_tracks1, more_tracks1):
     result = multiple_tracks1 + more_tracks1
-   # print("Song", result)
     return result
 
-#Add songs to a playlist
+# Add songs to a playlist
 def add_to_playlist(song_list, artist_list, album_list, my_username, my_playlist_id, track_id_list):
-  #  sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     for i in range(len(song_list)):
         track_dict = sp.search(q= song_list[i] + " " + artist_list[i] + " " + album_list[i], limit = 1, offset = 0, type='track', market=None)
         print(song_list[i] + " " + artist_list[i] + " " + album_list[i])
