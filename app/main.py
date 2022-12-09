@@ -2,15 +2,6 @@
 
 # Imports
 import app.tajMusic as tm
-#from bs4 import BeautifulSoup
-#import json
-#import xmltodict
-#import pprint
-#import pandas as pd
-#from spotipy.oauth2 import SpotifyClientCredentials
-#import spotipy
-#import spotipy.util as util
-#import numpy as np
 
 # Spotify Token Access
 import os
@@ -41,7 +32,7 @@ album_list = tm.album_list_generator(playlist)
 # Get username
 my_username = tm.get_username()
 
-# Get playlist name 
+# Get playlist name
 playlist_name = tm.get_playlist_name()
 
 # Create playlist

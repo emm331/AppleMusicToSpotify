@@ -1,4 +1,4 @@
-#this is the AppleMusicToSpotify/web_app/routes/convert_route.py file...
+# this is the AppleMusicToSpotify/web_app/routes/convert_routes.py file...
 
 from flask import Blueprint, request, render_template, redirect, flash
 
@@ -25,7 +25,7 @@ def convert_playlist():
 
         return render_template("playlist.html",
             username=username, name=name)
-        
-    except Exception as err:
+  
+  except Exception as err:
         print("Oops")
         return redirect("/convert")

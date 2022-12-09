@@ -2,15 +2,15 @@
 
 # Imports
 from bs4 import BeautifulSoup
-import json
+#import json
 import xmltodict
-import pprint
+#import pprint
 import pandas as pd
 
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 import spotipy.util as util
-import numpy as np
+#import numpy as np
 import app.tajMusic as tm
 import os
 from dotenv import load_dotenv
@@ -94,7 +94,7 @@ def create_playlist(username, playlist_name):
         sp.trace = False
         playlists = sp.user_playlist_create(username, playlist_name)
         return playlists['id']
-    
+
 # Add songs to Spotify Playlist
 def add_songs_to_playlist(username, playlist_id, track_ids):
     
@@ -129,4 +129,4 @@ def add_to_playlist(song_list, artist_list, album_list, my_username, my_playlist
 
     for i in range(len(track_id_list)):
         token = tm.add_songs_to_playlist(my_username, my_playlist_id, track_id_list[i])
-
+        
