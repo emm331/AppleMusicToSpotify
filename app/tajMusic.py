@@ -9,6 +9,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 import spotipy.util as util
 import numpy as np
+import app.tajMusic as tm
 
 # Spotify Token Access
 #Do we need this here, i think we have it in main
@@ -145,5 +146,5 @@ def add_to_playlist(song_list, artist_list, album_list, my_username, my_playlist
     print(track_id_list)
 
     for i in range(len(track_id_list)):
-        token = app.tm.add_songs_to_playlist(my_username, my_playlist_id, track_id_list[i])
+        token = tm.add_songs_to_playlist(my_username, my_playlist_id, track_id_list[i])
 
