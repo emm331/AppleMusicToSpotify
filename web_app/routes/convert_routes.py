@@ -2,7 +2,7 @@
 
 from flask import Blueprint, request, render_template, redirect, flash
 
-from tajMusic import get_username, create_playlist, get_missing_track_id, add_songs_to_playlist, add_song_ids, add_to_playlist, song_list_generator, artist_list_generator, album_list_generator
+from app.tajMusic import get_username, create_playlist, get_missing_track_id, add_songs_to_playlist, add_song_ids, add_to_playlist, song_list_generator, artist_list_generator, album_list_generator
 
 convert_routes = Blueprint("convert_routes", __name__)
 

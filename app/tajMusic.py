@@ -145,5 +145,5 @@ def add_to_playlist(song_list, artist_list, album_list, my_username, my_playlist
     print(track_id_list)
 
     for i in range(len(track_id_list)):
-        token = tm.add_songs_to_playlist(my_username, my_playlist_id, track_id_list[i])
+        token = app.tm.add_songs_to_playlist(my_username, my_playlist_id, track_id_list[i])
 
