@@ -1,14 +1,12 @@
-#this is the AppleMusicToSpotify/main.py file...
+#this is the AppleMusicToSpotify/app/main.py file...
 
-#Need to remove imports that aren't used
-#import applemusic_xml_parser as axp
+#Imports
 import app.tajMusic as tm
 from bs4 import BeautifulSoup
 import json
 import xmltodict
 import pprint
 import pandas as pd
-#New imports -- make sure to add these to requirements.txt
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 import spotipy.util as util
@@ -24,12 +22,6 @@ client_id = os.getenv("client_id")
 client_secret = os.getenv("client_secret")
 client_credentials_manager = os.getenv("client_credentials_manager")
 sp = os.getenv("sp")
-
-#need to move this into .env file 
-#client_id = "e511d6d85faa4eb2bf5992529106c09b"
-#client_secret = "7ea0c0a57a434e6e915f683a8be4b920"
-#client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
-#sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 #Get XML name
 playlist = tm.xml_name()
@@ -55,10 +47,8 @@ playlist_name = tm.get_playlist_name()
 #Create playlist
 my_playlist_id = tm.create_playlist(my_username, playlist_name)
 
-#Track ID List
+#Get track ID List
 track_id_list = []
 
 #Add songs to a playlist
 tm.add_to_playlist(song_list, artist_list, album_list, my_username, my_playlist_id, track_id_list)
-
-#tm.everything(playlist, my_username, playlist_name)

@@ -20,21 +20,21 @@ pip install -r requirements.txt
 ### Export Apple Music playlists to XML File
 The first step is to select the playlist you want to import over and export it as an XML file. 
 This is done by going to Apple Music, selecting File -> Library -> Export Playlist. 
-Save the resuting file in the same directory as the directory where you cloned this repo.
+Save the resuting file in the same directory as where you cloned this repository.
 
 ### Create a Spotify app 
 Create a Spotify app at the [spotify developer dashboard](https://developer.spotify.com/dashboard/applications) and select redirect url to `http://localhost:8888/callback`
 - Create WebApp
 - Edit Settings
 - Redirect URIs -> http://localhost:8888/callback -> Add -> Save
-- Go to .env file and securely set Client ID and Client Secret from new created app 
+- Go to .env file and securely set Client ID and Client Secret from your newly created app 
 
 ###
 After running the web app (instructions below), log on to your Spotify account, and enjoy your newly created playlist!
 
 ### Web App
 
-Run the web app (then view in the browser at c):
+Run the web app (then view in the browser at http://localhost:5000):
 
 ```sh
 # Mac OS:
