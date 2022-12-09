@@ -1,5 +1,8 @@
-##import applemusic_xml_parser as axp
-import tajMusic as tm
+#this is the AppleMusicToSpotify/main.py file...
+
+#Need to remove imports that aren't used
+#import applemusic_xml_parser as axp
+import app.tajMusic as tm
 from bs4 import BeautifulSoup
 import json
 import xmltodict
@@ -21,6 +24,7 @@ client_secret = os.getenv("client_secret")
 client_credentials_manager = os.getenv("client_credentials_manager")
 sp = os.getenv("sp")
 
+#need to move this into .env file 
 #client_id = "e511d6d85faa4eb2bf5992529106c09b"
 #client_secret = "7ea0c0a57a434e6e915f683a8be4b920"
 #client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
