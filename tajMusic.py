@@ -114,7 +114,7 @@ def get_missing_track_id(missing_albums1, missing_tracks1):
 
 # Add songs to Spotify Playlist
 def add_songs_to_playlist(username, playlist_id, track_ids):
-
+    
     username = username
     playlist_id = playlist_id
     track_ids = track_ids
@@ -148,13 +148,3 @@ def add_to_playlist(song_list, artist_list, album_list, my_username, my_playlist
     for i in range(len(track_id_list)):
         token = tm.add_songs_to_playlist(my_username, my_playlist_id, track_id_list[i])
 
-def everything(playlist, my_username, my_playlist_id):
-    #playist is xml name
-    #my_username is username
-    #my_playlist_id is new playlist name
-    print(playlist)
-    print(my_username)
-    print(my_playlist_id)
-    return(playist)
-    return(my_username)
-    return(my_playlist_id)
