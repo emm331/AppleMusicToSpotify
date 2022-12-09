@@ -18,10 +18,10 @@ def convert_playlist():
         song_l = song_list_generator(XML)
         artist_l = artist_list_generator(XML)
         album_l = album_list_generator(XML)
-        track_i = []
+        track_id = []
 
         playlist_id = create_playlist(username, name)
-        track_id = add_to_playlist(song_l, artist_l, album_l, username, playlist_id, track_i)
+        track_id = add_to_playlist(song_l, artist_l, album_l, username, playlist_id, track_id)
 
         return render_template("playlist.html",
             username=username, name=name)
