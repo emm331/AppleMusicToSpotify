@@ -34,7 +34,7 @@ After running the web app (instructions below), log on to your Spotify account, 
 
 ### Web App
 
-Run the web app (then view in the browser at http://localhost:5000/):
+Run the web app (then view in the browser at c):
 
 ```sh
 # Mac OS:

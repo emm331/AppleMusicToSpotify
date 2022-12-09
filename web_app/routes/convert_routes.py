@@ -16,8 +16,8 @@ def convert_playlist():
 
     name = request_data.get("name") or "Taj on Aux"
     #put this in a .env
-    username = request_data.get("username") or "31kxkygp247mvkk3ixeeiryzuodm"
-    XML = request.files["XML"].filename or "Music.xml"
+    username = request_data.get("username") ## or "31kxkygp247mvkk3ixeeiryzuodm"
+    XML = request.files["XML"].filename #or "Music.xml"
 
     try:
         song_l = song_list_generator(XML)
