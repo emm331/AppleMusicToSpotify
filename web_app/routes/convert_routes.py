@@ -26,6 +26,6 @@ def convert_playlist():
         return render_template("playlist.html",
             username=username, name=name)
   
-  except Exception as err:
-        print("Oops")
-        return redirect("/convert")
+    except Exception as err:
+          print("Oops")
+          return redirect("/convert")

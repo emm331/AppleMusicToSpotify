@@ -2,15 +2,12 @@
 
 # Imports
 from bs4 import BeautifulSoup
-#import json
 import xmltodict
-#import pprint
 import pandas as pd
 
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 import spotipy.util as util
-#import numpy as np
 import app.tajMusic as tm
 import os
 from dotenv import load_dotenv
@@ -129,4 +126,3 @@ def add_to_playlist(song_list, artist_list, album_list, my_username, my_playlist
 
     for i in range(len(track_id_list)):
         token = tm.add_songs_to_playlist(my_username, my_playlist_id, track_id_list[i])
-        
